@@ -69,7 +69,7 @@
                             学校</label>
                     </div>
                     <div class="ctrl">
-                        <input type="text" id="school" class="required"  name="school" data-required="true" value="四川工程职业技术学院" readonly>
+                        <input type="text" id="school" class="required"  name="school" data-required="true" value="">
                     </div>
                 </div><br/><br>
 {% endblock %}  {#提交表单内容#}
@@ -113,7 +113,7 @@
                 var majorVal = $.trim(this.value);
                  if (majorVal === "")
                  {
-                     var errorMsg = " 专业非空！格式如：软件技术（三专）";
+                     var errorMsg = " 专业非空！格式如：软件工程";
 
                     $parent.append("<span class='msg onError'>" + errorMsg + "</span>");
                  }
