@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/js/echarts.js"></script>
+    <script src="/static/js/echarts-wordcloud.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+
+
+    <link rel="stylesheet" href="/static/css/wechat_analysis.css">
+
+
+
+</head>
+<body>
+
+<div id="world_map" ></div>
+<div id="wechat_data">
+    <h2>微信好友数据分析</h2>
+    <div class="sex_container">
+    <div id="sex">
+    <h3>性别比例：</h3>
+        <lable>男：<span id="male"></span></lable><br><br>
+        <label>女：<span id="female"></span></label><br><br>
+        <label>其他：<span id="other"></span></label><br><br>
+
+    </div>
+    <div id="sex_chart">
+    </div>
+    </div>
+    <div class="word_container">
+        <div id="word_count">
+            <h3>好友签名词频统计概况</h3>
+            <table id="table" style="border-style: hidden;font-size:medium;">
+
+            </table>
+        </div>
+        <div id="word_cloud"></div>
+    </div>
+</div>
+
+</body>
+
+<script>
+    var position_count ={{ data_city|safe }};
+
+        {#{   '海门': 20,#}
+        {#    '齐齐哈尔':1,#}
+        {#    '盐城':2,#}
+        {#    '青岛': 10,#}
+        {#    '德阳': 20,#}
+    var geoCoordMap = {{ data_map|safe }};
+    {#    '海门':[121.15,31.89]#}
+    var word_count = {{ data_word|safe }};
+    var sex_count={{ data_sex|safe }};
+
+    document.getElementById("male").innerHTML=sex_count["男"];
+    document.getElementById("female").innerHTML=sex_count["女"];
+    document.getElementById("other").innerHTML=sex_count["其他"];
+    var table = document.getElementById("table");
+    var temp = 1;
+    var col = 0;
+    var row = table.insertRow(table.rows.length);
+    for (var key in word_count) {
+        if(word_count[key]===1)
+        {
+            continue;
+        }
+        if(word_count.length>200)
+        {
+            if(word_count[key]===2)
+            {
+                continue;
+            }
+        }
+        if(key==='的')
+            continue;
+
+        if(temp%4===0)
+        {
+        col=0;
+        row = table.insertRow(table.rows.length);
+        }
+        else {
+
+            var c1 = row.insertCell(col);
+            c1.innerHTML = key + " : " + word_count[key];
+            col++;
+        }
+        temp++;
+
+}
+
+
+</script>
+<script src="/static/js/wechat_analysis/wechat_map.js"></script>
+<script src="/static/js/wechat_analysis/sex_chart.js"></script>
+<script src="/static/js/wechat_analysis/sign_wordcloud.js"></script>
+
+</html>

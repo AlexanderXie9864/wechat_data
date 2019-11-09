@@ -1,0 +1,14 @@
+{% extends 'wechat/da_base.html' %}
+
+{% block title %}采集成功{% endblock %}
+
+{% block center_body %}
+            <div id="body_info">
+                <h1>数据采集成功!!!</h1><br><br><br>
+                <p>真诚感谢参与本次数据采集老师和同学，<a href="dataPerShow?id={{ usr_id }}&type={{ usr_type }}&school={{ usr_school }}&key={{ key }}">点击此处</a>查看个人可视化数据.</p>
+                <p style="font-weight: bold;">请记住您的个人数据查询密钥：{{key}}</p>
+                <p>若对本次数据采集有任何疑问、或者想要修改数据请联系QQ：986475316</p>
+                <p>邮箱：orsonxie@foxmail.com</p>
+                <p>PS：添加好友时请填写备注</p>
+            </div>
+{% endblock %}  {#中央内容#}

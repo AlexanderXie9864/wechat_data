@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="cdad707b-c9ee-4609-b07d-e1d84ac9b1b5" name="aliyun" url="http://119.23.8.234">
+        <fileTransfer host="119.23.8.234" port="22" rootFolder="/home/alex/www/spider_data" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

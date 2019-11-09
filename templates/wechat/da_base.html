@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+<title>{% block title %}校园微信数据采集{% endblock %}-alexander</title>
+<link href="/static/favicon.ico" mce_href="favicon.ico" rel="icon" type="image/x-icon">
+<link rel="shortcut icon" href="favicon.ico" />
+<link href="/static/css/da_style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/static/css/button.css">
+{% block head %}
+{% endblock %}
+</head>
+<body>
+<div id="center_wrapper">
+    <div id="center_header">
+        <div id="center_menu">
+            <ul>
+                <li><a href="/"><span></span>数据采集</a></li>
+                <li><a href="#"><span></span>平台说明</a></li>
+                <li><a href="/da/daSearch"><span></span>数据查询</a></li>
+                <li><a href="#"><span></span>赞赏</a></li>
+                <li><a href="#"><span></span>联系我</a></li>
+            </ul>
+        </div>
+
+        <div id="center_body">
+            {% block center_body %}
+            {% endblock %}
+        </div>
+
+  {%  block footer %}
+        <div id="footer_wrapper">
+            <div id="footer">
+              {% include 'copyright_template.html' %}
+                <div class="cleaner"></div>
+            </div>
+    </div>
+    {% endblock %}
+
+</div>
+
+</div>
+
+
+</body>
+
+{% block script %}
+{% endblock %}
+
+</html>

@@ -1,0 +1,132 @@
+{% extends 'wechat/da_base.html' %}
+{% block title %}个人微信数据查询{% endblock %}  {# 标题 #}
+
+
+{% block head %}
+    <script src="/static/js/jquery-1.11.1.min.js"></script>
+    <style>
+        .high{ color: red; }
+     .msg{ font-size: 13px; }
+     .onError{ color: red; }
+     .onSuccess{ color: green; }
+        .ctrl{
+            margin-top: 25px;
+            text-align: left;}
+    </style>
+    {% endblock %}  {# 头部样式、jquery链接 #}
+
+{% block center_body %}
+            <h1>个人微信数据查询</h1>
+            <div id="body_info">
+
+                <br><br>
+                <form style="margin-left: 37%;">
+                    <div class="ctrl">
+                <label for="id_num">号码：</label>
+                <input id="id_num" type="text" class="required">
+                    </div>
+
+                      <div class="ctrl">
+                <label for="type">类型：</label>
+                <select id="type" style="width: 100px">
+                    <option value="student">学生</option>
+                    <option value="teacher">老师</option>
+                </select></div>
+
+                    <div class="ctrl">
+                <label for="school">学校：</label>
+
+                <input id="school" type="text"  class="required">
+                    </div>
+                    <div class="ctrl">
+                <label for="key">密钥：</label>
+
+                <input id="key" type="text"  class="required">
+                    </div>
+                    </form>
+                <div id="search_bt" class="button green"><div class="shine"></div>开始查询</div>
+            </div>
+{% endblock %}  {#中央内容#}
+
+{% block script %}
+<script>
+    $("form :input.required").each(function () {
+            //通过jquery api：$("HTML字符串") 创建jquery对象
+            var $required = $("<strong class='high'>*</strong>");
+            //添加到this对象的父级对象下
+            $(this).parent().append($required);
+        });
+
+    $("form :input").blur(function() {
+            var $parent = $(this).parent();
+            $parent.find(".msg").remove(); //删除以前的提醒元素（find()：查找匹配元素集中元素的所有匹配元素）
+            //验证id号
+
+     if ($(this).is("#id_num")) {
+                var idVal = $.trim(this.value);
+                var regId = /[~#^$@%&!*()<>:;'"{}【】  ]/;
+                if (idVal == "" || regId.test(idVal)) {
+                    var errorMsg = "号码是您采集数据时所填写的学号或者教师号，不包含特殊字符！";
+                    //class='msg onError' 中间的空格是层叠样式的格式
+                    $parent.append("<span class='msg onError'>" + errorMsg + "</span>");
+                }
+                else {
+                    var okMsg = " OK√";
+                    $parent.find(".high").remove();
+                    $parent.append("<span class='msg onSuccess'>" + okMsg + "</span>");
+                }
+            }
+
+     if ($(this).is("#school")) {
+                var schoolVal = $.trim(this.value);
+                 if (schoolVal === "")
+                 {
+                     var errorMsg = "学校非空！";
+                    //class='msg onError' 中间的空格是层叠样式的格式
+                    $parent.append("<span class='msg onError'>" + errorMsg + "</span>");
+                 }
+                  else {
+                    var okMsg = " OK√";
+                    $parent.find(".high").remove();
+                    $parent.append("<span class='msg onSuccess'>" + okMsg + "</span>");
+                }
+             }
+
+             if ($(this).is("#key")) {
+                var keyVal = $.trim(this.value);
+                 if (keyVal === "")
+                 {
+                     var errorMsg = "查询密钥非空！";
+                    //class='msg onError' 中间的空格是层叠样式的格式
+                    $parent.append("<span class='msg onError'>" + errorMsg + "</span>");
+                 }
+                  else {
+                    var okMsg = " OK√";
+                    $parent.find(".high").remove();
+                    $parent.append("<span class='msg onSuccess'>" + okMsg + "</span>");
+                }
+             }
+
+
+             }).keyup(function(){
+            //triggerHandler 防止事件执行完后，浏览器自动为标签获得焦点
+            $(this).triggerHandler("blur");
+        }).focus(function(){
+            $(this).triggerHandler("blur");
+        });
+
+    $('#search_bt').click(function () {
+        $("form .required:input").trigger("blur");
+            var numError = $("form .onError").length;
+            if(numError){
+                return false;
+            }
+
+        var id=$('#id_num').val();
+        var type=$('#type').val();
+        var school=$('#school').val();
+        var key=$('#key').val();
+        $(location).attr('href',"dataPerShow?id="+id+"&type="+type+"&school="+school+"&key="+key);
+    })
+</script>
+{% endblock %}  {# js代码 #}

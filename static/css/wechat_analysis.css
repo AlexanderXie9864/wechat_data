@@ -1,0 +1,68 @@
+body{
+    background-image: url('../img/bg.jpg');
+}
+#world_map{
+    width: 60%;
+    height: 790px;
+    float: left;
+
+}
+#wechat_data{
+    float: left;
+    background-color:transparent;
+    width: 38%;
+    height: 790px;
+    margin-left: 10px;
+
+}
+#wechat_data h2{
+    color: gray;
+}
+#wechat_data h3{
+    color: gray;
+}
+.sex_container{
+    height: 20%;
+    width: 100%;
+
+}
+#sex{
+    float: left;
+    width: 50%;
+    height: 100%;
+    background-color: transparent;
+
+    color: gray;
+}
+
+#sex_chart{
+    float: left;
+    width: 49%;
+    height: 100%;
+    border: 1px solid;
+}
+
+.word_container{
+    height: 63%;
+    width: 100%;
+    background-color: transparent;
+}
+#word_count{
+    height: 40%;
+    width: 100%;
+    background-color: transparent;
+    color: grey;
+    max-lines: 6;
+    overflow-y: scroll;
+}
+#word_count #table tr{
+    height: 30px;
+}
+#word_count #table tr td{
+    width: 200px;
+}
+#word_cloud{
+    height: 70%;
+    width: 100%;
+    background-color: grey;
+}

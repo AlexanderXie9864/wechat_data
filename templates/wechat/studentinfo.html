@@ -1,0 +1,136 @@
+﻿{% extends 'wechat/info_base.html' %}
+
+{% block form_content %}
+                <div class="row clearfix">
+                    <div class="lbl">
+                    <label for="studentid">
+                        ID号</label>
+                    </div>
+                    <div class="ctrl">
+                    <input type="text" id="studentid" class="required" name="student_id" data-required="true" >
+                    </div>
+            </div><br/><br>
+                <div class="row clearfix">
+                    <div class="lbl">
+                        <label for="sex">
+                            性别:</label>
+                    </div>
+                    <div class="ctrl">
+                        <input type="radio" id="sex" name="sex" value="男" checked="checked"/>男<br/>
+                        <input type="radio"  name="sex" value="女" />女
+                    </div>
+                </div>
+                <br><br>
+                <div class="row clearfix">
+                <div class="lbl">
+                    <label for="eroyear">
+                        入学年份</label>
+                </div>
+                <div class="ctrl">
+                    <select  id="eroyear" name="eroyear" data-required="true" style="width: 120px;">
+                        <option value="2018">2018</option>
+                        <option value="2017" selected>2017</option>
+                        <option value="2016">2016</option>
+                        <option value="2015">2015</option>
+                        <option value="2014">2014</option>
+                        </select>
+                </div>
+            </div><br/><br>
+                <div class="row clearfix">
+                <div class="lbl">
+                    <label for="major">
+                        专业</label>
+                </div>
+                <div class="ctrl">
+                    <input type="text" id="major" class="required" name="major" data-required="true">
+                </div>
+            </div><br/><br>
+                <div class="row clearfix">
+                    <div class="lbl">
+                        <label for="department">
+                            系别</label>
+                    </div>
+                    <div class="ctrl">
+                        <select  id="department" name="department" data-required="true" style="width: 120px;">
+                            <option value="电气信息工程系" selected>电气信息工程系</option>
+                            <option value="旅游管理系">旅游管理系</option>
+                            <option value="机电工程系">机电工程系</option>
+                            <option value="经济管理系">经济管理系</option>
+                            <option value="建筑工程系">建筑工程系</option>
+                            <option value="交通工程系">交通工程系</option>
+                            <option value="材料工程系">材料工程系</option>
+                            <option value="外语系">外语系</option>
+                        </select>
+                    </div>
+                </div><br/><br>
+                <div class="row clearfix">
+                    <div class="lbl">
+                        <label for="school">
+                            学校</label>
+                    </div>
+                    <div class="ctrl">
+                        <input type="text" id="school" class="required"  name="school" data-required="true" value="四川工程职业技术学院" readonly>
+                    </div>
+                </div><br/><br>
+{% endblock %}  {#提交表单内容#}
+
+
+{% include 'wechat/info_qr_template.html' %}  {#二维码代码#}
+
+{% block input_blur_event %}
+            if ($(this).is("#studentid")) {
+                var studentidVal = $.trim(this.value);
+                var regId = /[~#^$@%&!*()<>:;'"{}【】+  ]/;
+                if (studentidVal == "" || studentidVal.length < 6 || regId.test(studentidVal)) {
+                    var errorMsg = " 请填写你能记住的号码，方便查询，长度6位以上，不包含特殊字符！";
+
+                    $parent.append("<span class='msg onError'>" + errorMsg + "</span>");
+                }
+                else {
+                    var okMsg = " 输入正确";
+                    $parent.find(".high").remove();
+                    $parent.append("<span class='msg onSuccess'>" + okMsg + "</span>");
+                }
+            }
+
+            if ($(this).is("#school")) {
+                var schoolVal = $.trim(this.value);
+                 if (schoolVal === "")
+                 {
+                     var errorMsg = " 学校非空！";
+
+                    $parent.append("<span class='msg onError'>" + errorMsg + "</span>");
+                 }
+                  else {
+                    var okMsg = " 输入正确";
+                    $parent.find(".high").remove();
+                    $parent.append("<span class='msg onSuccess'>" + okMsg + "</span>");
+                }
+             }
+
+
+             if ($(this).is("#major")) {
+                var majorVal = $.trim(this.value);
+                 if (majorVal === "")
+                 {
+                     var errorMsg = " 专业非空！格式如：软件技术（三专）";
+
+                    $parent.append("<span class='msg onError'>" + errorMsg + "</span>");
+                 }
+                  else {
+                    var okMsg = " 输入正确";
+                    $parent.find(".high").remove();
+                    $parent.append("<span class='msg onSuccess'>" + okMsg + "</span>");
+                }
+             }
+            {% endblock %}   {#输入控件聚焦代码块#}
+
+
+{% block ajax_data %}
+            var data={
+                'id' : $('#studentid').val(),
+                'type':'student',
+                'school':$('#school').val()
+            };
+{% endblock %}  {#ajax请求所需数据#}
+
