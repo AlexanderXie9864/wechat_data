@@ -58,3 +58,75 @@ visua_data:数据清理以及可视化脚本代码
 
 ### 数据查询页面
 数据查询页面（da_search.html），继承于da_base.html，包含了一个公共模板（copyright_template.html），提供数据查询功能，用户可通过此页面对自己的数据进行精确查询。（界面截图见附表图9）
+
+
+## itchat源码修改（路径请各位看官根据自己项目修改）
+### 一、
+
+位置：
+
+==/home/alex/.virtualenvs/bysj/lib/python3.6/site-packages/itchat/__init__.py==
+
+
+操作：添加代码块
+
+功能：根据sessid获取itchat实例实现多开
+
+```
+def new_instance_dict(sessid):
+    newInstance = Core()
+    instanceDict[sessid] = newInstance
+    return newInstance
+
+
+#按sessid取得instance
+
+def restore_instance(sessid):
+    return instanceDict[sessid]
+```
+
+### 二
+位置：
+/home/alex/.virtualenvs/bysj/lib/python3.6/site-packages/itchat/components/login.py
+
+操作：注释==utils.print_qr(picDir)==
+
+功能：不打印qrcode，直接生成后存在picDir
+
+```
+def get_QR(self, uuid=None, enableCmdQR=False, picDir=None, qrCallback=None):
+    uuid = uuid or self.uuid
+    picDir = picDir or config.DEFAULT_QR
+    qrStorage = io.BytesIO()
+    qrCode = QRCode('https://login.weixin.qq.com/l/' + uuid)
+    qrCode.png(qrStorage, scale=10)
+    if hasattr(qrCallback, '__call__'):
+        qrCallback(uuid=uuid, status='0', qrcode=qrStorage.getvalue())
+    else:
+        if enableCmdQR:
+            utils.print_cmd_qr(qrCode.text(1), enableCmdQR=enableCmdQR)
+        else:
+            with open(picDir, 'wb') as f:
+                f.write(qrStorage.getvalue())
+            # utils.print_qr(picDir)
+    return qrStorage
+```
+
+### 三
+位置：/home/alex/.virtualenvs/bysj/lib/python3.6/site-packages/itchat
+
+操作：添加user_agent代理池
+
+功能：实现user_agent随机，防止被微信查出来同一个机器
+```
+agent = [
+'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50',
+'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36',
+'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.163 Safari/535.1',
+'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0',
+'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.133 Safari/534.16',
+'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.84 Safari/535.11 SE 2.X MetaSr 1.0',
+'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; QQBrowser/7.0.3698.400)']
+USER_AGENT = agent[random.randint(0,6)]
+```
+
