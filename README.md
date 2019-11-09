@@ -29,7 +29,7 @@ redis3.2.12
 前端控件：Echarts
 
 ## 项目结构：
-'''
+```
 Spider_Data: 存储Django框架的设置，url路由，以及wsgi通信接口。
 static: 存储网站所有应用的静态文件，如图片，js文件，css文件。
 templates: 存储所有应用的模板文件，主要内容为html文件
@@ -47,7 +47,7 @@ uwsgi.pid: uWSGI服务器进程号，通过这个文件一次性杀死所有uWSG
 mysql:存放mysql的sql文件，便于构建数据库
 visua_data:数据清理以及可视化脚本代码
 //////////
-'''
+```
 
 
 
