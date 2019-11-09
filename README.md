@@ -62,22 +62,22 @@ visua_data:数据清理以及可视化脚本代码
 
 ## 页面介绍
 ### 首页面
-首页面（da.html），继承于da_base.html，包含了两个公共模板（copyright_template.html、icp_beian_template.html），用于数据采集向导以及系统安全说明，主要功能为链接向导，根据页面提供的链接导向指定功能页面，主要使用CSS样式以及button控件实现界面效果。（界面截图见附表图1）
+首页面（da.html），继承于da_base.html，包含了两个公共模板（copyright_template.html、icp_beian_template.html），用于数据采集向导以及系统安全说明，主要功能为链接向导，根据页面提供的链接导向指定功能页面，主要使用CSS样式以及button控件实现界面效果。
 
 ### 数据填表页面
-数据填表页面（studentinfo.html、teacherinfo.html），继承于info_base.html，包含了三个公共模板(copyright_template.html、info_ajax_template.js、info_qr_template.html),是数据采集核心页面，包含两种类型,分别采集学生数据和老师数据，主要使用表单页面样式、layer插件实现界面效果，使用Ajax、jQuery实现页面功能，其中，Ajax用于异步交互json数据，检查数据是否重复，随后页面无刷新弹出二维码，等待用户扫描；jQuery用于表单验证，去除不必要的数据，以及提交表单。（界面截图见附表图2、图3、图4）
+数据填表页面（studentinfo.html、teacherinfo.html），继承于info_base.html，包含了三个公共模板(copyright_template.html、info_ajax_template.js、info_qr_template.html),是数据采集核心页面，包含两种类型,分别采集学生数据和老师数据，主要使用表单页面样式、layer插件实现界面效果，使用Ajax、jQuery实现页面功能，其中，Ajax用于异步交互json数据，检查数据是否重复，随后页面无刷新弹出二维码，等待用户扫描；jQuery用于表单验证，去除不必要的数据，以及提交表单。
 
 ### 采集成功页面
-采集成功页面（da_success.html），继承于da_base.html，包含了一个公共模板（copyright_template.html），用于展现采集成功信息，提供一键导向个人数据可视化页面，并提供查询密钥。（界面截图见附表图5）
+采集成功页面（da_success.html），继承于da_base.html，包含了一个公共模板（copyright_template.html），用于展现采集成功信息，提供一键导向个人数据可视化页面，并提供查询密钥。
 
 ### 采集失败页面
-采集失败页面（da_fail.html），继承于da_base.html，与采集成功页面功能类似，用于展现采集失败信息。（界面截图略，样式参照图5）
+采集失败页面（da_fail.html），继承于da_base.html，与采集成功页面功能类似，用于展现采集失败信息。
 
 ### 个人数据展现页面
-个人数据展现页面（wechat_analysis.html），为单独的一个模板，是采集系统功能呈现页面，主要利用了Echarts完成数据可视化呈现，其中地图用了百度的bmap接口，词云利用了echatrs_wordcloud.js插件。前端所需的数据，由后端渲染模板时，直接传参。（界面截图见附表图6、图7、图8，数据展示为本人的数据）
+个人数据展现页面（wechat_analysis.html），为单独的一个模板，是采集系统功能呈现页面，主要利用了Echarts完成数据可视化呈现，其中地图用了百度的bmap接口，词云利用了echatrs_wordcloud.js插件。前端所需的数据，由后端渲染模板时，直接传参。
 
 ### 数据查询页面
-数据查询页面（da_search.html），继承于da_base.html，包含了一个公共模板（copyright_template.html），提供数据查询功能，用户可通过此页面对自己的数据进行精确查询。（界面截图见附表图9）
+数据查询页面（da_search.html），继承于da_base.html，包含了一个公共模板（copyright_template.html），提供数据查询功能，用户可通过此页面对自己的数据进行精确查询。
 
 
 ## itchat源码修改（路径请各位看官根据自己项目修改）
